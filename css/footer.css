@@ -74,7 +74,7 @@ footer {
 
 .previous-button {
 	height: 100%;
-	background: var(--dark-gray);
+	background: var(--blue);
 	padding: 5px 2rem;
 	color: white;
 	font-weight: 600;

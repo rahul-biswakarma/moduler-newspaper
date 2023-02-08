@@ -12,7 +12,7 @@ let newsPaper = {
 			},
 			news: [
 				{
-					headingStyle: 3,
+					headingStyle: 1,
 					pageNo: 1,
 					headline: "Lorem ipsum dolor sit amet.",
 					paragraphs: [
