@@ -1,6 +1,6 @@
 let newsPaper = {
 	info: {
-		totalPageNumbers: 4,
+		totalPageNumbers: 2,
 		price: 34.3,
 		newsDate: "08 Feb, 2023",
 	},
@@ -63,21 +63,38 @@ let newsPaper = {
 					hasImage: true,
 					imageUrl: "https://picsum.photos/id/4/400",
 				},
+				{
+					headingStyle: 1,
+					pageNo: 2,
+					headline: "Satyam has Macbook",
+					paragraphs: [
+						"Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quidem a dolorum asperiores quod unde dolorem incidunt ipsa voluptate aliquid beatae quia maiores iusto accusamus provident eius architecto error rerum corporis doloremque obcaecati, minus iste! Dicta cum alias consectetur molestiae itaque, suscipit harum ipsam deserunt debitis quasi! Nisi inventore hic eveniet fugiat iste dolore expedita labore laboriosam nemo. Animi culpa debitis explicabo sed quis, quibusdam necessitatibus beatae aspernatur. Excepturi eum dolores facere voluptatem, repudiandae totam corrupti illum, animi assumenda, dolor in ex perspiciatis eius iure. Omnis modi non explicabo porro vero voluptas eveniet fugit deleniti neque asperiores. Atque rerum unde pariatur laudantium hic aliquid ea similique corporis enim. Magnam ipsum sit, in molestias sunt rerum velit non error? Distinctio repellendus commodi harum dolore animi aliquid nobis molestiae quibusdam ea mollitia voluptate iusto itaque quod facere iste quasi, aliquam aut sequi natus explicabo ipsam necessitatibus perferendis! Necessitatibus, labore natus? Magnam repellat quasi labore ipsam laborum doloribus reiciendis facere, velit nemo necessitatibus harum nam fuga nihil porro corrupti tenetur aperiam quia facilis aspernatur totam sunt nisi! Ipsam consequuntur temporibus exercitationem repellat optio, cupiditate cumque explicabo facere earum, nisi hic adipisci suscipit repudiandae! Placeat sed itaque aliquid laudantium, veniam esse distinctio quaerat possimus nesciunt fugiat odit. Sunt dolore iste neque illo molestias sequi, laboriosam rerum vero, doloribus, ullam atque ab quod eum quos dolorem consectetur cum adipisci perspiciatis asperiores recusandae. Possimus quas voluptates enim cupiditate iusto commodi maiores, temporibus magni, accusantium aperiam eum esse delectus animi debitis laborum alias magnam, praesentium perferendis laudantium vitae officiis! Assumenda, aliquid nobis eos animi quisquam velit itaque voluptate eveniet! Quibusdam necessitatibus eaque numquam unde, vero totam eius dolore rerum sit odit odio omnis at quod ducimus, asperiores quia architecto provident nisi optio sunt deleniti voluptatum dignissimos eos exercitationem! Natus atque nesciunt magnam, sunt quod omnis dolorum in obcaecati commodi enim vitae voluptatem excepturi ex pariatur neque officiis dignissimos repudiandae, cumque assumenda. Molestiae, mollitia. Minima provident, laborum recusandae natus quo error voluptatibus distinctio dolor ad quasi eius dolore? Fuga temporibus molestias voluptatum nesciunt voluptate? Numquam ipsam aspernatur eos velit expedita distinctio hic quae omnis labore.",
+					],
+				},
 			],
 		},
 	],
 };
 
 let bodyElement = document.getElementById("body");
-bodyElement.innerHTML += newsPaper.pages.map((page, index) => {
+bodyElement.innerHTML += newsPaper.pages.reduce((acc, page, index) => {
 	let currentPageNumber = index + 1;
-	let header = createHeader(
-		currentPageNumber,
-		newsPaper.info.price,
-		newsPaper.info.newsDate,
-		page.info.hasSpecialMessage,
-		page.info.specialMessage
-	);
+	let header =
+		currentPageNumber === 1
+			? createHomeHeader(
+					currentPageNumber,
+					newsPaper.info.price,
+					newsPaper.info.newsDate,
+					page.info.hasSpecialMessage,
+					page.info.specialMessage
+			  )
+			: createHeader(
+					currentPageNumber,
+					newsPaper.info.price,
+					newsPaper.info.newsDate,
+					page.info.hasSpecialMessage,
+					page.info.specialMessage
+			  );
 	let footer = createFooter(newsPaper.info.totalPageNumbers, currentPageNumber);
 
 	let main = `${page.news.reduce((acc, news) => {
@@ -92,5 +109,7 @@ bodyElement.innerHTML += newsPaper.pages.map((page, index) => {
 		return acc;
 	}, "")}`;
 
-	return `<section id="page-${currentPageNumber}" class="page">${header} <main>${main}</main> ${footer}</section>`;
-});
+	acc += `<section id="page-${currentPageNumber}" class="page">${header} <main>${main}</main> ${footer}</section>`;
+
+	return acc;
+}, "");

@@ -5,8 +5,14 @@ article {
 
 article:not(:nth-child(1)) h1 {
 	margin-top: 2rem;
-	border-top: 1.5px solid var(--black);
-	padding-top: 2rem;
+	/* border-top: 1.5px solid var(--black);
+	padding-top: 2rem; */
+}
+
+article:not(:last-child) {
+	margin-bottom: 2rem;
+	border-bottom: 1.5px solid var(--black);
+	padding-bottom: 2rem;
 }
 
 .big-heading {
@@ -40,6 +46,7 @@ article > div {
 	width: 100%;
 	font-family: "Public Sans", sans-serif;
 	font-size: 15px;
+	orphans: 4;
 }
 
 img {

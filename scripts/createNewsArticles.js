@@ -9,7 +9,7 @@ function createNewsArticle(
 	imageUrl = ""
 ) {
 	return `
-		<article >
+		<article>
 			<h1 class="${headingStyles[headingStyle]}">${headline}</h1>
 			<div>
 			${hasImage === true ? `<img src="${imageUrl}" alt="" >` : ""}
